@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 
 import { fadeIn } from "../utils/motion";
 
-const Login = ({ authHandler, toggleForm }) => {
+const Register = ({ authHandler, toggleForm }) => {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -23,8 +25,10 @@ const Login = ({ authHandler, toggleForm }) => {
       setPasswordError(true);
     }
 
+    // Additional validation for other fields if needed
+
     if (email && password) {
-      authHandler({ email, password });
+      authHandler({ firstname, lastname, email, password });
     }
   };
 
@@ -39,9 +43,45 @@ const Login = ({ authHandler, toggleForm }) => {
           variants={fadeIn("right", "spring", 0, 1)}
           initial="hidden"
           animate="show"
+          className="flex flex-row justify-between"
+        >
+          <label className="w-[45%]">
+            Firstname
+            <div>
+              <TextField
+                size="small"
+                onChange={(e) => setFirstname(e.target.value)}
+                required
+                variant="outlined"
+                color="orange"
+                type="text"
+                fullWidth
+              />
+            </div>
+          </label>
+          <label className="w-[45%]">
+            Lastname
+            <div>
+              <TextField
+                size="small"
+                onChange={(e) => setLastname(e.target.value)}
+                required
+                variant="outlined"
+                color="orange"
+                type="text"
+                fullWidth
+              />
+            </div>
+          </label>
+        </motion.div>
+        <motion.div
+          variants={fadeIn("right", "spring", 0.3, 1)}
+          initial="hidden"
+          animate="show"
         >
           E-Mail
           <TextField
+            size="small"
             onChange={(e) => setEmail(e.target.value)}
             required
             variant="outlined"
@@ -53,12 +93,13 @@ const Login = ({ authHandler, toggleForm }) => {
           />
         </motion.div>
         <motion.div
-          variants={fadeIn("right", "spring", 0.3, 1)}
+          variants={fadeIn("right", "spring", 0.6, 1)}
           initial="hidden"
           animate="show"
         >
           Password
           <TextField
+            size="small"
             onChange={(e) => setPassword(e.target.value)}
             required
             variant="outlined"
@@ -71,23 +112,23 @@ const Login = ({ authHandler, toggleForm }) => {
         </motion.div>
       </CardContent>
       <motion.div
-        variants={fadeIn("right", "spring", 0.6, 1)}
+        variants={fadeIn("right", "spring", 0.9, 1)}
         initial="hidden"
         animate="show"
       >
         <CardActions className=" flex justify-between !p-4">
           <Button variant="outlined" color="orange" type="submit">
-            Login
+            Register
           </Button>
 
           <small>
-            Need an account?{" "}
+            Already have an account?{" "}
             <spam
               onClick={toggleForm}
               to="/register"
               className="text-orange cursor-pointer"
             >
-              Register
+              Login
             </spam>
           </small>
         </CardActions>
@@ -96,4 +137,4 @@ const Login = ({ authHandler, toggleForm }) => {
   );
 };
 
-export default Login;
+export default Register;

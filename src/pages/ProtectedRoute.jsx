@@ -1,10 +1,13 @@
-import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
 export default function ProtectedRoute() {
-  const isAuthenticated = localStorage.getItem('jwtToken');
+  const [token, setToken] = useState(false);
+  useEffect(() => {
+    setToken(true);
+  }, [localStorage.getItem("jwtToken")]);
 
-  if (!isAuthenticated) {
+  if (!token) {
     return <Navigate to="/login" replace />;
   }
 
