@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Header from "../components/Header";
 import HabitCard from "../components/HabitCard";
 import Container from "../components/Container";
+import AddHabitCard from "../components/AddHabitCard";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHabits } from "../store/habitActions";
@@ -32,10 +33,14 @@ function MainPage() {
           <div>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
-            {habits &&
+            {habits.length > 0 ? (
               habits.map((habit, id) => {
                 <HabitCard {...habit} id={id} />;
-              })}
+              })
+            ) : (
+              <p>There are no habits yet! Try add one</p>
+            )}
+            <AddHabitCard />
           </div>
         </div>
       </Container>
