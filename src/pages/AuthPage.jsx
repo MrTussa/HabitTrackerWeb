@@ -8,7 +8,8 @@ import FloatCircles from "../components/Circles";
 import { fadeIn } from "../utils/motion";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
-import { userLogin } from "../store/authActions";
+import { userLogin, userRegister } from "../store/authActions";
+import { clearError } from "../store/authSlice";
 
 function AuthPage() {
   const [toggleForm, setToggleForm] = useState(false);
@@ -18,14 +19,16 @@ function AuthPage() {
   const navigate = useNavigate();
 
   const setToggleFormHandler = () => {
+    dispatch(clearError());
     setToggleForm(!toggleForm);
-    console.log(toggleForm);
   };
 
   const getLogin = (data) => {
     dispatch(userLogin(data));
   };
-  console.log(success);
+  const getRegister = (data) => {
+    dispatch(userRegister(data));
+  };
   useEffect(() => {
     if (success) {
       navigate("/");
@@ -37,11 +40,16 @@ function AuthPage() {
       <Card className="!shadow-orange relative flex flex-row !rounded-card w-[670px]">
         {toggleForm ? (
           <RegisterForm
-            authHandler={getLogin}
+            authHandler={getRegister}
             toggleForm={setToggleFormHandler}
+            error={error}
           />
         ) : (
-          <LoginForm authHandler={getLogin} toggleForm={setToggleFormHandler} />
+          <LoginForm
+            authHandler={getLogin}
+            toggleForm={setToggleFormHandler}
+            error={error}
+          />
         )}
         <div className="w-2/5 flex justify-center items-center bg-gradient-to-tr from-[#FEE140] to-[#FA709A] z-10  ">
           <motion.p

@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Header from "../components/Header";
 import HabitCard from "../components/HabitCard";
 import Container from "../components/Container";
 
+import { useDispatch, useSelector } from "react-redux";
+import { fetchHabits } from "../store/habitActions";
+
 function MainPage() {
+  const dispatch = useDispatch();
+  const { userToken } = useSelector((state) => state.auth);
+  const { habits, loading, error } = useSelector((state) => state.habit);
+
+  useEffect(() => {
+    if (userToken) {
+      dispatch(fetchHabits());
+    }
+  }, [dispatch, userToken]);
+
   return (
     <div className="bg-slate-100">
       <Header />
@@ -16,7 +29,14 @@ function MainPage() {
             <div>Reminder</div>
             <div className="text-right">Completion</div>
           </div>
-          <HabitCard />
+          <div>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error}</p>}
+            {habits &&
+              habits.map((habit, id) => {
+                <HabitCard {...habit} id={id} />;
+              })}
+          </div>
         </div>
       </Container>
     </div>

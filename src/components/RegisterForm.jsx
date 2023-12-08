@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import { fadeIn } from "../utils/motion";
 
-const Register = ({ authHandler, toggleForm }) => {
+const Register = ({ authHandler, toggleForm, error }) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -36,7 +36,7 @@ const Register = ({ authHandler, toggleForm }) => {
     <form
       autoComplete="on"
       onSubmit={handleSubmit}
-      className="w-3/5 h-80 flex justify-between flex-col relative text-left"
+      className="w-3/5 h-[21rem] flex justify-between flex-col relative text-left"
     >
       <CardContent className="flex gap-2 flex-col">
         <motion.div
@@ -110,6 +110,16 @@ const Register = ({ authHandler, toggleForm }) => {
             fullWidth
           />
         </motion.div>
+        {error && (
+          <motion.p
+            variants={fadeIn("right", "spring", 0.3, 1)}
+            initial="hidden"
+            animate="show"
+            className="text-red-500"
+          >
+            {error}
+          </motion.p>
+        )}
       </CardContent>
       <motion.div
         variants={fadeIn("right", "spring", 0.9, 1)}
@@ -123,13 +133,13 @@ const Register = ({ authHandler, toggleForm }) => {
 
           <small>
             Already have an account?{" "}
-            <spam
+            <span
               onClick={toggleForm}
               to="/register"
               className="text-orange cursor-pointer"
             >
               Login
-            </spam>
+            </span>
           </small>
         </CardActions>
       </motion.div>
