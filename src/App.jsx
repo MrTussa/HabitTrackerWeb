@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import RegistrationPage from "./pages/RegistrationPage";
 import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import ErrorPage from "./pages/ErrorPage";
 
 import "./App.css";
 
@@ -37,9 +37,8 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route index path="/" element={<MainPage />} />
           </Route>
-          <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/auth" element={<AuthPage />} />
-          <Route path="*" element={<p>Error page not found: 404</p>}></Route>
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

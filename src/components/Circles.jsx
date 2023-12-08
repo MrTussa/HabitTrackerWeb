@@ -23,7 +23,6 @@ const FloatingCircles = () => {
       style={{
         width: "60px",
         height: "60px",
-        background: " rgb(255,125,57)",
         background:
           "radial-gradient(circle, rgba(255,231,218,1) 0%, rgba(255,125,57,1) 56%, rgba(232,102,41,1) 98%, rgba(255,255,255,0) 100%)",
         borderRadius: "50%",

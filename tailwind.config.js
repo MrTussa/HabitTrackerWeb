@@ -7,7 +7,8 @@ export default {
         orange: "#F97316",
       },
       boxShadow: {
-        card: "0px 2px 10px 0px rgba(249, 115, 22, 0.2)",
+        orange: "0px 2px 10px 0px rgba(249, 115, 22, 0.2)",
+        card: "0px 2px 10px 0px #f0f0f0",
       },
       borderRadius: {
         card: "8px",

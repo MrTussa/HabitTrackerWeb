@@ -82,13 +82,13 @@ const Login = ({ authHandler, toggleForm }) => {
 
           <small>
             Need an account?{" "}
-            <spam
+            <span
               onClick={toggleForm}
               to="/register"
               className="text-orange cursor-pointer"
             >
               Register
-            </spam>
+            </span>
           </small>
         </CardActions>
       </motion.div>

@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import Logo from "./Logo";
 
 const Header = () => {
-    return (
-        <div className='py-6'>
-            <h1 className='text-orange font-extrabold text-lg'>Habit tracker</h1>
-        </div>
-    );
-}
+  return (
+    <div className="flex justify-start py-6 px-9 bg-white w-[100dvw]">
+      <Logo />
+    </div>
+  );
+};
 
 export default Header;

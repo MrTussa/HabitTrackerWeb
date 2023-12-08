@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function ProtectedRoute() {
-  const [token, setToken] = useState(false);
-  useEffect(() => {
-    setToken(true);
-  }, [localStorage.getItem("jwtToken")]);
-
-  if (!token) {
-    return <Navigate to="/login" replace />;
+  const { userToken } = useSelector((state) => state.auth);
+  if (!userToken) {
+    return <Navigate to="/auth" replace />;
   }
 
   return <Outlet />;

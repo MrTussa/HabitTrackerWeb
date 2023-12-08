@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Card } from "@mui/material";
 import { motion } from "framer-motion";
+import { useSelector, useDispatch } from "react-redux";
 
 import FloatCircles from "../components/Circles";
 import { fadeIn } from "../utils/motion";
-
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
+import { userLogin } from "../store/authActions";
+
 function AuthPage() {
   const [toggleForm, setToggleForm] = useState(false);
+  const { loading, error, success } = useSelector((state) => state.auth);
 
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const setToggleFormHandler = () => {
@@ -20,23 +22,19 @@ function AuthPage() {
     console.log(toggleForm);
   };
 
-  const getLogin = async (data) => {
-    const { email, password } = data;
-    try {
-      const response = await axios.post(`${BASE_URL}/api/login`, {
-        email: email,
-        password: password,
-      });
-      const { token } = response.data;
-      localStorage.setItem("jwtToken", token);
-      navigate((to = "/"));
-    } catch (error) {
-      console.error("Ошибка при входе:", error.response.data.error);
-    }
+  const getLogin = (data) => {
+    dispatch(userLogin(data));
   };
+  console.log(success);
+  useEffect(() => {
+    if (success) {
+      navigate("/");
+    }
+  }, [success]);
+
   return (
     <div className="flex-1 justify-center items-center flex ">
-      <Card className="!shadow-card relative flex flex-row !rounded-card w-[670px]">
+      <Card className="!shadow-orange relative flex flex-row !rounded-card w-[670px]">
         {toggleForm ? (
           <RegisterForm
             authHandler={getLogin}
