@@ -30,15 +30,15 @@ function MainPage() {
             <div>Reminder</div>
             <div className="text-right">Completion</div>
           </div>
-          <div>
-            {loading && <p>Loading...</p>}
+          <div className="flex flex-col gap-3">
+            {loading && <p className="min-h-[53px]">Loading...</p>}
             {error && <p>Error: {error}</p>}
             {habits.length > 0 ? (
-              habits.map((habit, id) => {
-                <HabitCard {...habit} id={id} />;
-              })
-            ) : (
+              habits.map((habit, index) => <HabitCard {...habit} key={index} />)
+            ) : !loading ? (
               <p>There are no habits yet! Try add one</p>
+            ) : (
+              ""
             )}
             <AddHabitCard />
           </div>

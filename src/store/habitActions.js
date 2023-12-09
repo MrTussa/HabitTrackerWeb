@@ -29,8 +29,8 @@ export const addHabit = createAsyncThunk(
     try {
       const userToken = getState().auth.userToken;
       const config = {
+        Authorization: userToken,
         headers: {
-          Authorization: userToken,
           "Content-Type": "application/json",
         },
       };
@@ -42,6 +42,27 @@ export const addHabit = createAsyncThunk(
       const response = await axios.post(
         `${backendURL}/api/habits/add`,
         body,
+        config
+      );
+      return response.data.habit;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const deleteHabit = createAsyncThunk(
+  "habit/deleteHabit",
+  async ({ habitId }, { rejectWithValue, getState }) => {
+    try {
+      const userToken = getState().auth.userToken;
+      console.log(habitId);
+      const config = {
+        headers: {
+          Authorization: userToken,
+        },
+      };
+      const response = await axios.delete(
+        `${backendURL}/api/habits/delete/${habitId}`, // Включаем habitId в URL
         config
       );
       return response.data.habit;
