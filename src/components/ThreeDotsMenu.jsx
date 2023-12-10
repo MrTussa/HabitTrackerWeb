@@ -11,12 +11,14 @@ const ThreeDotsMenu = ({ itemOnClick }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
-    itemOnClick();
   };
-
+  const itemHandle = () => {
+    itemOnClick();
+    setAnchorEl(null);
+  };
   return (
     <div
-      className="absolute hidden group-hover:!block right-0"
+      className="absolute hidden group-hover:!block right-0 z-50"
       style={{ display: anchorEl ? "block" : "none" }}
     >
       <IconButton onClick={handleClick}>
@@ -28,7 +30,7 @@ const ThreeDotsMenu = ({ itemOnClick }) => {
         className="group"
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem onClick={itemHandle}>Delete</MenuItem>
       </Menu>
     </div>
   );

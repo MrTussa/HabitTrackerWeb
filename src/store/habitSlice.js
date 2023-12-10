@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchHabits, addHabit } from "./habitActions";
+import { fetchHabits, addHabit, deleteHabit } from "./habitActions";
 
 const initialState = {
   startData: null,
@@ -8,11 +8,14 @@ const initialState = {
   error: null,
 };
 
-export const habit = createSlice({
+export const habitSlice = createSlice({
   name: "habit",
   initialState,
   reducers: {
-    // Добавьте необходимые редукторы здесь, если есть
+    deleteHabitHandler: (state, { payload }) => {
+      const habitId = payload.habitId;
+      state.habits = state.habits.filter((habit) => habit._id !== habitId);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -34,7 +37,11 @@ export const habit = createSlice({
       })
       .addCase(addHabit.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.habits.push(payload);
+        const currDay = new Date().getDay();
+        console.log(payload.day);
+        if (payload.day.includes(currDay) || payload.day[0] === -1) {
+          state.habits.push(payload);
+        }
       })
       .addCase(addHabit.rejected, (state, { payload }) => {
         state.loading = false;
@@ -42,5 +49,5 @@ export const habit = createSlice({
       });
   },
 });
-
-export default habit.reducer;
+export const { deleteHabitHandler } = habitSlice.actions;
+export default habitSlice.reducer;

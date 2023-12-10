@@ -14,8 +14,46 @@ export const fetchHabits = createAsyncThunk(
           Authorization: userToken,
         },
       };
-      const response = await axios.get(`${backendURL}/api/habits/`, config);
+
+      const formattedDay = new Date();
+
+      const response = await axios.get(
+        `${backendURL}/api/habits/?day=${formattedDay.toISOString()}`,
+        config
+      );
+
       return response.data.habits;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const markCompleted = createAsyncThunk(
+  "habit/markCompleted",
+  async ({ habitId, day }, { rejectWithValue, getState }) => {
+    try {
+      const userToken = getState().auth.userToken;
+      const config = {
+        headers: {
+          Authorization: userToken,
+          "Content-Type": "application/json",
+        },
+      };
+
+      const body = {
+        habitId,
+        date: getCurrentDateISOString(),
+        day: day,
+      };
+
+      const response = await axios.patch(
+        `${backendURL}/api/habits/mark-completed`,
+        body,
+        config
+      );
+
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -29,16 +67,17 @@ export const addHabit = createAsyncThunk(
     try {
       const userToken = getState().auth.userToken;
       const config = {
-        Authorization: userToken,
         headers: {
+          Authorization: userToken,
           "Content-Type": "application/json",
         },
       };
       const body = {
         habitName,
-        day,
+        day: day,
         reminder,
       };
+
       const response = await axios.post(
         `${backendURL}/api/habits/add`,
         body,
@@ -55,7 +94,6 @@ export const deleteHabit = createAsyncThunk(
   async ({ habitId }, { rejectWithValue, getState }) => {
     try {
       const userToken = getState().auth.userToken;
-      console.log(habitId);
       const config = {
         headers: {
           Authorization: userToken,
@@ -71,3 +109,12 @@ export const deleteHabit = createAsyncThunk(
     }
   }
 );
+
+function getCurrentDateISOString() {
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const isoString = `${year}-${month}-${day}`;
+  return isoString;
+}

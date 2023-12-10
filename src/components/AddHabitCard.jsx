@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { addHabit } from "../store/habitActions";
 import { useDispatch } from "react-redux";
 
@@ -21,7 +21,6 @@ const HabitCard = () => {
 
   const checkDay = (day) => {
     // Обновлять массив выбранных дней при изменении состояния Checkbox
-    console.log(selectedDays);
     setSelectedDays((prevDays) =>
       prevDays.includes(day)
         ? prevDays.filter((d) => d !== day)
@@ -30,8 +29,8 @@ const HabitCard = () => {
   };
 
   const addHabitHandler = () => {
-    const selectedDaysToSend = selectedDays.length === 7 ? null : selectedDays;
-    console.log(selectedDays);
+    const selectedDaysToSend = selectedDays.length === 7 ? [-1] : selectedDays;
+    console.log(selectedDaysToSend);
     try {
       dispatch(addHabit({ habitName, day: selectedDaysToSend, reminder }));
       closeModalHandler();
@@ -39,13 +38,8 @@ const HabitCard = () => {
       // Обработка ошибок при добавлении привычки
       console.error("Error adding habit:", error);
     }
+    setSelectedDays([0, 1, 2, 3, 4, 5, 6]);
   };
-
-  useEffect(() => {
-    return () => {
-      setSelectedDays([0, 1, 2, 3, 4, 5, 6]);
-    };
-  }, []);
 
   return (
     <div>

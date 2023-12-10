@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 import { useDispatch } from "react-redux";
 
@@ -7,16 +7,21 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ThreeDotsMenu from "./ThreeDotsMenu";
 
-import { deleteHabit } from "../store/habitActions";
+import { deleteHabit, markCompleted } from "../store/habitActions";
+import { deleteHabitHandler } from "../store/habitSlice";
 
-const HabitCard = ({ _id, reminder, day, habitName }) => {
+const HabitCard = ({ _id, reminder, day, habitName, completed = false }) => {
+  const [isChecked, setIsChecked] = useState(completed);
   const dispatch = useDispatch();
-
-  const daysLength = day === "-1" ? 7 : day.length;
+  const daysLength = day[0] === -1 ? 7 : day.length;
   const deleteHandler = () => {
     dispatch(deleteHabit({ habitId: _id }));
+    dispatch(deleteHabitHandler({ habitId: _id }));
   };
-  // TODO: сделать удаление в редусере
+  const markHandler = () => {
+    setIsChecked(!isChecked);
+    dispatch(markCompleted({ habitId: _id, day: day }));
+  };
   return (
     <Card className="!shadow-card text-lg font-semibold group  relative grid grid-cols-4 !rounded-card px-4 items-center">
       <div className="text-left">{habitName}</div>
@@ -26,10 +31,12 @@ const HabitCard = ({ _id, reminder, day, habitName }) => {
       <div>{reminder}</div>
       <div className="flex justify-end">
         <Checkbox
+          onChange={markHandler}
           className="!mr-[17px]"
           size="large"
           icon={<CheckCircleOutlineIcon />}
           checkedIcon={<CheckCircleIcon color="success" />}
+          checked={isChecked}
         />
       </div>
       <ThreeDotsMenu itemOnClick={deleteHandler} />

@@ -35,8 +35,10 @@ function MainPage() {
             {error && <p>Error: {error}</p>}
             {habits.length > 0 ? (
               habits.map((habit, index) => <HabitCard {...habit} key={index} />)
-            ) : !loading ? (
-              <p>There are no habits yet! Try add one</p>
+            ) : !loading || error ? (
+              <p className="min-h-[53px]">
+                There are no habits yet! Try add one
+              </p>
             ) : (
               ""
             )}
