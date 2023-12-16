@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import moment from "moment";
 const backendURL = import.meta.env.VITE_BASE_URL;
 
 // Действие для получения всех привычек пользователя
@@ -15,10 +15,10 @@ export const fetchHabits = createAsyncThunk(
         },
       };
 
-      const formattedDay = new Date();
+      const formattedDay = moment().format("YYYY-MM-DD");
 
       const response = await axios.get(
-        `${backendURL}/api/habits/?day=${formattedDay.toISOString()}`,
+        `${backendURL}/api/habits/?day=${formattedDay}`,
         config
       );
 
@@ -104,6 +104,33 @@ export const deleteHabit = createAsyncThunk(
         config
       );
       return response.data.habit;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchMonthHabits = createAsyncThunk(
+  "habit/fetchMonthHabits",
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const userToken = getState().auth.userToken;
+      const config = {
+        headers: {
+          Authorization: userToken,
+        },
+      };
+
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+
+      const response = await axios.get(
+        `${backendURL}/api/habits/month?year=${year}&month=${month}`,
+        config
+      );
+
+      return response.data.habits;
     } catch (error) {
       return rejectWithValue(error.message);
     }

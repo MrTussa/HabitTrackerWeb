@@ -4,9 +4,11 @@ import Header from "../components/Header";
 import HabitCard from "../components/HabitCard";
 import Container from "../components/Container";
 import AddHabitCard from "../components/AddHabitCard";
+import HabitsChart from "../components/HabitsChart";
+import Calendar from "../components/Calendar";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchHabits } from "../store/habitActions";
+import { fetchHabits, fetchMonthHabits } from "../store/habitActions";
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ function MainPage() {
   useEffect(() => {
     if (userToken) {
       dispatch(fetchHabits());
+      dispatch(fetchMonthHabits());
     }
   }, [dispatch, userToken]);
 
@@ -24,6 +27,10 @@ function MainPage() {
       <Header />
       <Container>
         <div>
+          <div className="flex flex-row justify-between">
+            <Calendar />
+            <HabitsChart />
+          </div>
           <div className=" px-4 grid grid-cols-4">
             <div className="text-left">Habit name</div>
             <div>Days</div>

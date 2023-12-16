@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchHabits, addHabit, deleteHabit } from "./habitActions";
+import { fetchHabits, addHabit, fetchMonthHabits } from "./habitActions";
 
 const initialState = {
   startData: null,
   habits: [],
+  habitCompletion: [],
   loading: false,
   error: null,
 };
@@ -28,6 +29,18 @@ export const habitSlice = createSlice({
         state.habits = payload;
       })
       .addCase(fetchHabits.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(fetchMonthHabits.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchMonthHabits.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.habitCompletion = payload;
+      })
+      .addCase(fetchMonthHabits.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       })
