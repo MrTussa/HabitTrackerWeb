@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
+import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import ErrorPage from "./pages/ErrorPage";
 
@@ -37,6 +38,7 @@ function App() {
         <Routes>
           <Route element={<ProtectedRoute />}>
             <Route index path="/" element={<MainPage />} />
+            <Route index path="/profile" element={<ProfilePage />} />
           </Route>
           <Route path="/auth" element={<AuthPage />} />
           <Route path="*" element={<ErrorPage />} />

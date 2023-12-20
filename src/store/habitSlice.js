@@ -51,7 +51,6 @@ export const habitSlice = createSlice({
       .addCase(addHabit.fulfilled, (state, { payload }) => {
         state.loading = false;
         const currDay = new Date().getDay();
-        console.log(payload.day);
         if (payload.day.includes(currDay) || payload.day[0] === -1) {
           state.habits.push(payload);
         }

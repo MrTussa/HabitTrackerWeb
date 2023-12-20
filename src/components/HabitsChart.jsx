@@ -33,7 +33,6 @@ const HabitsChart = () => {
             scaleType: "point",
             data: habitCompletionData.dates,
             id: "Years",
-            scaleType: "time",
             valueFormatter: (date) => moment(date).format("MMM Do"),
           },
         ]}
