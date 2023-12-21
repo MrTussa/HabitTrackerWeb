@@ -6,6 +6,8 @@ import Container from "../components/Container";
 import AddHabitCard from "../components/AddHabitCard";
 import HabitsChart from "../components/HabitsChart";
 import Calendar from "../components/Calendar";
+import { motion } from "framer-motion";
+import { slideIn, fadeIn } from "../utils/motion";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHabits, fetchMonthHabits } from "../store/habitActions";
@@ -24,12 +26,32 @@ function MainPage() {
 
   return (
     <div className="bg-slate-100">
-      <Header />
+      <motion.div
+        variants={slideIn("down", "spring", 0.3, 1)}
+        initial="hidden"
+        animate="show"
+        className="mb-8"
+      >
+        <Header />
+      </motion.div>
       <Container>
         <div>
           <div className="flex flex-row justify-between">
-            <Calendar />
-            <HabitsChart />
+            <motion.div
+              variants={fadeIn("right", "spring", 0.3, 1)}
+              initial="hidden"
+              animate="show"
+            >
+              <Calendar />
+            </motion.div>
+            <motion.div
+              variants={fadeIn("left", "spring", 0.3, 1)}
+              initial="hidden"
+              animate="show"
+              className="flex justify-end w-full"
+            >
+              <HabitsChart />
+            </motion.div>
           </div>
           <div className=" px-4 grid grid-cols-4">
             <div className="text-left">Habit name</div>
