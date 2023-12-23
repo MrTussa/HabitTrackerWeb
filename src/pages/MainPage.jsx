@@ -6,8 +6,9 @@ import Container from "../components/Container";
 import AddHabitCard from "../components/AddHabitCard";
 import HabitsChart from "../components/HabitsChart";
 import Calendar from "../components/Calendar";
+import FriendList from "../components/FriendList";
 import { motion } from "framer-motion";
-import { slideIn, fadeIn } from "../utils/motion";
+import { fadeIn } from "../utils/motion";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHabits, fetchMonthHabits } from "../store/habitActions";
@@ -26,17 +27,12 @@ function MainPage() {
 
   return (
     <div className="bg-slate-100">
-      <motion.div
-        variants={slideIn("down", "spring", 0.3, 1)}
-        initial="hidden"
-        animate="show"
-        className="mb-8"
-      >
+      <div className="mb-8">
         <Header />
-      </motion.div>
-      <Container>
-        <div>
-          <div className="flex flex-row justify-between">
+      </div>
+      <Container className={"flex flex-row justify-between bg-slate-100"}>
+        <div className="w-full">
+          <div className="flex flex-row justify-between gap-2">
             <motion.div
               variants={fadeIn("right", "spring", 0.3, 1)}
               initial="hidden"
@@ -48,7 +44,7 @@ function MainPage() {
               variants={fadeIn("left", "spring", 0.3, 1)}
               initial="hidden"
               animate="show"
-              className="flex justify-end w-full"
+              className="w-[60%]"
             >
               <HabitsChart />
             </motion.div>
@@ -63,7 +59,15 @@ function MainPage() {
             {loading && <p className="min-h-[53px]">Loading...</p>}
             {error && <p>Error: {error}</p>}
             {habits.length > 0 ? (
-              habits.map((habit, index) => <HabitCard {...habit} key={index} />)
+              habits.map((habit, index) => (
+                <motion.div
+                  variants={fadeIn("left", "spring", index * 0.3, 1)}
+                  initial="hidden"
+                  animate="show"
+                >
+                  <HabitCard {...habit} key={index} />
+                </motion.div>
+              ))
             ) : !loading || error ? (
               <p className="min-h-[53px]">
                 There are no habits yet! Try add one
@@ -73,6 +77,9 @@ function MainPage() {
             )}
             <AddHabitCard />
           </div>
+        </div>
+        <div className="w-[35%] ml-8">
+          <FriendList />
         </div>
       </Container>
     </div>

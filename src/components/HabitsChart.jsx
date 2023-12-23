@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { Card } from "@mui/material";
 const HabitsChart = () => {
   const { habitCompletion } = useSelector((state) => state.habit);
-  const width = screen.width - 1452 - 32;
   const addInitialDayData = () => {
     const currDate = moment();
     let dates = [];
@@ -23,10 +22,8 @@ const HabitsChart = () => {
   };
   const habitCompletionData = addInitialDayData(habitCompletion);
 
-  console.log(habitCompletionData);
-
   return (
-    <Card className="!shadow-card text-lg font-semibold relative !rounded-card px-4 items-center w-3/5">
+    <Card className="!shadow-card text-lg font-semibold relative !rounded-card items-center h-full">
       <LineChart
         xAxis={[
           {

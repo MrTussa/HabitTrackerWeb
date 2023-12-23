@@ -51,7 +51,7 @@ export default function DateCalendarServerRequest() {
   const [highlightedDays, setHighlightedDays] = React.useState([1, 2, 15]);
 
   return (
-    <Card className="!shadow-card text-lg font-semibold relative   !rounded-card px-4 items-center">
+    <Card className="!shadow-card text-lg font-semibold relative   !rounded-card items-center">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar
           defaultValue={initialValue}

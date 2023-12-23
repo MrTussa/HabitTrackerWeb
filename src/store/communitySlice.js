@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUser } from "./communityActions";
+import { fetchUser, searchUsers } from "./communityActions";
 
 const initialState = {
   user: {},
+  users: [],
   friends: [],
   posts: [],
   loading: false,
@@ -22,10 +23,15 @@ export const communitySlice = createSlice({
       .addCase(fetchUser.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.user = payload;
+        state.friends = payload.friends;
       })
       .addCase(fetchUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
+      })
+      .addCase(searchUsers.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        state.users = payload;
       });
   },
 });

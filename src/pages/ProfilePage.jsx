@@ -18,9 +18,10 @@ const Profile = () => {
     dispatch(logoutUser());
     navigate("/auth");
   };
-
   useEffect(() => {
-    dispatch(fetchUser());
+    if (user) {
+      dispatch(fetchUser());
+    }
   }, []);
 
   return (

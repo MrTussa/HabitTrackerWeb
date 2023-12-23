@@ -30,7 +30,6 @@ const HabitCard = () => {
 
   const addHabitHandler = () => {
     const selectedDaysToSend = selectedDays.length === 7 ? [-1] : selectedDays;
-    console.log(selectedDaysToSend);
     try {
       dispatch(addHabit({ habitName, day: selectedDaysToSend, reminder }));
       closeModalHandler();
