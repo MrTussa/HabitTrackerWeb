@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUser, searchUsers } from "./communityActions";
+import { fetchUser, searchUsers, fetchNotifications } from "./communityActions";
 
 const initialState = {
   user: {},
   users: [],
   friends: [],
   posts: [],
+  notifications: [],
   loading: false,
+  searchLoading: false,
   error: null,
 };
 
@@ -29,9 +31,17 @@ export const communitySlice = createSlice({
         state.loading = false;
         state.error = payload;
       })
+      .addCase(searchUsers.pending, (state) => {
+        state.users = [];
+        state.searchLoading = true;
+      })
       .addCase(searchUsers.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.users = payload;
+        state.searchLoading = false;
+      })
+      .addCase(fetchNotifications.fulfilled, (state, { payload }) => {
+        state.notifications = payload;
+        console.log(state.notifications);
       });
   },
 });

@@ -1,26 +1,47 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchUser, searchUsers } from "../store/communityActions";
+import {
+  fetchUser,
+  searchUsers,
+  sendFriendRequest,
+} from "../store/communityActions";
 
-import { CircularProgress, Button, Modal, Card } from "@mui/material";
+import {
+  CircularProgress,
+  Button,
+  Modal,
+  Card,
+  IconButton,
+} from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 
 import ProfileButton from "./ProfileButton";
 
 const FriendList = () => {
   const dispatch = useDispatch();
-  const { userToken, friends, loading, error, users } = useSelector(
+  const { friends, users, loading, error, searchLoading } = useSelector(
     (state) => state.community
   );
 
   const [openModal, setOpenModal] = useState(false);
-  const [friendName, setFriendName] = useState("");
+  const [friendRequestSentMap, setFriendRequestSentMap] = useState({});
 
   const openModalHandler = () => setOpenModal(true);
   const closeModalHandler = () => setOpenModal(false);
 
-  const addFriendHandler = () => {};
+  const addFriendHandler = (friendId) => {
+    dispatch(sendFriendRequest(friendId))
+      .unwrap()
+      .then((data) => {
+        setFriendRequestSentMap((prevMap) => ({
+          ...prevMap,
+          [friendId]: true, // установить состояние, что запрос был отправлен для конкретного пользователя
+        }));
+      });
+  };
 
   const searchFriendName = (name) => {
     dispatch(searchUsers(name));
@@ -52,16 +73,43 @@ const FriendList = () => {
                 placeholder="Enter friend name"
                 onChange={(e) => searchFriendName(e.target.value)}
               />
-              <div className="rounded-card mb-2 px-4 w-full">
-                {users && users.map((user) => <div>{user.firstname}</div>)}
+              <div className="rounded-card mb-2 p-4 w-full h-[300px] bg-white [&>*:last-child]:border-b-0 [&>*:last-child]:border-slate-400 flex flex-col gap-3">
+                {searchLoading && (
+                  <div className="m-auto">
+                    <CircularProgress color="orange" />
+                  </div>
+                )}
+                {users &&
+                  users.map(({ userId, firstname, lastname, stars }, index) => (
+                    <div
+                      key={index}
+                      className=" border-b-0 border-slate-400 flex flex-row justify-between"
+                    >
+                      <div className="flex flex-row gap-4 items-center">
+                        <ProfileButton userId={userId} />
+                        <div>
+                          {firstname} {lastname}
+                        </div>
+                      </div>
+                      <div className="flex flex-row gap-4 items-center">
+                        <div className="flex items-center">
+                          <StarRateRoundedIcon color="orange" /> {stars}
+                        </div>
+                        <IconButton
+                          color="orange"
+                          onClick={() => addFriendHandler(userId)}
+                          disabled={friendRequestSentMap[userId]} // Блокировать кнопку, если запрос уже был отправлен
+                        >
+                          {friendRequestSentMap[userId] ? (
+                            <PersonAddIcon color="green" />
+                          ) : (
+                            <PersonAddIcon />
+                          )}
+                        </IconButton>
+                      </div>
+                    </div>
+                  ))}
               </div>
-              <Button
-                color="orange"
-                className="w-full flex items-center justify-center !bg-white rounded-card px-4 py-1"
-                onClick={addFriendHandler}
-              >
-                Send friend request
-              </Button>
             </Card>
           </Modal>
         </div>

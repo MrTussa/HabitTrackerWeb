@@ -6,7 +6,7 @@ const Logo = () => {
   return (
     <Link to={"/"}>
       <h1 className="text-orange font-extrabold text-lg leading-10">
-        Habit Traker
+        Habit Tracker
       </h1>
     </Link>
   );

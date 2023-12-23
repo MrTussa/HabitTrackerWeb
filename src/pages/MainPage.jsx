@@ -12,6 +12,7 @@ import { fadeIn } from "../utils/motion";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHabits, fetchMonthHabits } from "../store/habitActions";
+import { fetchNotifications } from "../store/communityActions";
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function MainPage() {
     if (userToken) {
       dispatch(fetchHabits());
       dispatch(fetchMonthHabits());
+      dispatch(fetchNotifications());
     }
   }, [dispatch, userToken]);
 
