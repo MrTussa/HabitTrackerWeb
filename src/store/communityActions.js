@@ -105,7 +105,6 @@ export const acceptFriendRequest = createAsyncThunk(
           Authorization: userToken,
         },
       };
-      console.log(notifId, friendId);
       const response = await axios.post(
         `${backendURL}/api/community/accept-friend-request`,
         { notifId, friendId },

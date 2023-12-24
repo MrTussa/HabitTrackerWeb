@@ -12,7 +12,7 @@ const ProfileButton = ({ userId }) => {
     );
   } else {
     return (
-      <Link to={`/profile/${userId}`}>
+      <Link to={`/user/${userId}`}>
         <Avatar sx={{ bgcolor: "#F97316" }}>Prof</Avatar>
       </Link>
     );
