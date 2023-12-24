@@ -15,10 +15,18 @@ const initialState = {
 export const communitySlice = createSlice({
   name: "community",
   initialState,
-  reducers: {},
+  reducers: {
+    addFriendHandler: (state, { payload }) => {
+      state.notifications.filter(
+        (notif) => notif.message.userDetails.userId !== payload.userId
+      );
+      state.friends.push(payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.pending, (state) => {
+        state.friends = [];
         state.loading = true;
         state.error = null;
       })
@@ -41,8 +49,10 @@ export const communitySlice = createSlice({
       })
       .addCase(fetchNotifications.fulfilled, (state, { payload }) => {
         state.notifications = payload;
-        console.log(state.notifications);
       });
   },
 });
+
+export const { addFriendHandler } = communitySlice.actions;
+
 export default communitySlice.reducer;

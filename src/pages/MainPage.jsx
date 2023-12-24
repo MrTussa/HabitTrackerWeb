@@ -54,7 +54,7 @@ function MainPage() {
           <div className=" px-4 grid grid-cols-4">
             <div className="text-left">Habit name</div>
             <div>Days</div>
-            <div>Reminder</div>
+            <div></div>
             <div className="text-right">Completion</div>
           </div>
           <div className="flex flex-col gap-3">
@@ -67,7 +67,7 @@ function MainPage() {
                   initial="hidden"
                   animate="show"
                 >
-                  <HabitCard {...habit} key={index} />
+                  <HabitCard {...habit} key={habit._id} />
                 </motion.div>
               ))
             ) : !loading || error ? (

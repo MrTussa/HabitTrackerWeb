@@ -94,3 +94,27 @@ export const fetchNotifications = createAsyncThunk(
     }
   }
 );
+
+export const acceptFriendRequest = createAsyncThunk(
+  "community/acceptFriendRequest",
+  async ({ notifId, friendId }, { rejectWithValue, getState }) => {
+    try {
+      const userToken = getState().auth.userToken;
+      const config = {
+        headers: {
+          Authorization: userToken,
+        },
+      };
+      console.log(notifId, friendId);
+      const response = await axios.post(
+        `${backendURL}/api/community/accept-friend-request`,
+        { notifId, friendId },
+        config
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

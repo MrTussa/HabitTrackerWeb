@@ -79,7 +79,7 @@ const HabitCard = () => {
               ))}
             </div>
           </div>
-          <div className="bg-white rounded-card px-4 py-1 mb-3 flex justify-between">
+          {/* <div className="bg-white rounded-card px-4 py-1 mb-3 flex justify-between">
             <div className="flex items-center">
               <span className="text-lg mr-2">Reminder</span>
               <div className="font-extralight text-xs text-slate-500 inline">
@@ -87,7 +87,7 @@ const HabitCard = () => {
               </div>
             </div>
             <div>ADD CLoCK</div>
-          </div>
+          </div> */}
           <Button
             color="orange"
             className="w-full flex items-center justify-center !bg-white rounded-card px-4 py-1"

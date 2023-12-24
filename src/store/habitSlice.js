@@ -32,21 +32,8 @@ export const habitSlice = createSlice({
         state.loading = false;
         state.error = payload;
       })
-      .addCase(fetchMonthHabits.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(fetchMonthHabits.fulfilled, (state, { payload }) => {
-        state.loading = false;
         state.habitCompletion = payload;
-      })
-      .addCase(fetchMonthHabits.rejected, (state, { payload }) => {
-        state.loading = false;
-        state.error = payload;
-      })
-      .addCase(addHabit.pending, (state) => {
-        state.loading = true;
-        state.error = null;
       })
       .addCase(addHabit.fulfilled, (state, { payload }) => {
         state.loading = false;

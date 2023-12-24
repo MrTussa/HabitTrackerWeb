@@ -19,10 +19,12 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 
 import ProfileButton from "./ProfileButton";
+import { motion } from "framer-motion";
+import { fadeIn } from "../utils/motion";
 
 const FriendList = () => {
   const dispatch = useDispatch();
-  const { friends, users, loading, error, searchLoading } = useSelector(
+  const { user, friends, users, loading, error, searchLoading } = useSelector(
     (state) => state.community
   );
 
@@ -48,13 +50,13 @@ const FriendList = () => {
   };
 
   useEffect(() => {
-    if (!friends) {
+    if (user) {
       dispatch(fetchUser());
     }
   }, []);
 
   return (
-    <div className="w-[300px] bg-white rounded-card px-4">
+    <div className="w-[300px] h-80 bg-white rounded-card pl-4 pb-4">
       <div className="flex justify-between items-center">
         <div className="font-bold text-xl text-slate-800">Friend List</div>
         <div className="flex flex-row items-center">
@@ -73,7 +75,7 @@ const FriendList = () => {
                 placeholder="Enter friend name"
                 onChange={(e) => searchFriendName(e.target.value)}
               />
-              <div className="rounded-card mb-2 p-4 w-full h-[300px] bg-white [&>*:last-child]:border-b-0 [&>*:last-child]:border-slate-400 flex flex-col gap-3">
+              <div className="rounded-card mb-2 p-4 w-full h-[300px] bg-white [&>*:last-child]:border-b-0 [&>*:last-child]:border-slate-400 flex flex-col gap-3 overflow-auto">
                 {searchLoading && (
                   <div className="m-auto">
                     <CircularProgress color="orange" />
@@ -122,21 +124,21 @@ const FriendList = () => {
             variants={fadeIn("left", "spring", index * 0.3, 1)}
             initial="hidden"
             animate="show"
+            className="flex flex-row justify-between pr-4"
           >
-            <div>
+            <div className="flex flex-row gap-3 items-center">
+              <ProfileButton userId={userId} />
               <div>
-                <ProfileButton userId={userId} />
-                <div>
-                  <div>{firstname}</div>
-                  <div>{lastname}</div>
-                </div>
+                {firstname} {lastname}
               </div>
-              <div>{stars}</div>
+            </div>
+            <div className="flex items-center">
+              <StarRateRoundedIcon color="orange" /> {stars}
             </div>
           </motion.div>
         ))
       ) : !loading || error ? (
-        <p className="min-h-[53px]">You don't have friends yet!</p>
+        <p className="min-h-[53px] pr-4">You don't have friends yet!</p>
       ) : (
         ""
       )}
