@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const backendURL = "https://habit-tracker-server.vercel.app";
+// const backendURL = import.meta.env.VITE_BASE_URL;
 
 export const userRegister = createAsyncThunk(
   "auth/register",
@@ -13,7 +13,7 @@ export const userRegister = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `${backendURL}/api/user/register`,
+        `/api/user/register`,
         { firstname, lastname, email, password },
         config
       );
@@ -39,7 +39,7 @@ export const userLogin = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `${backendURL}/api/user/login`,
+        `/api/user/login`,
         { email, password },
         config
       );
