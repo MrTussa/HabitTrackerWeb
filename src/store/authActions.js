@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const backendURL = process.env.VITE_BASE_URL;
+const backendURL = "https://habit-tracker-server.vercel.app";
 
 export const userRegister = createAsyncThunk(
   "auth/register",
