@@ -125,6 +125,7 @@ const FriendList = () => {
             initial="hidden"
             animate="show"
             className="flex flex-row justify-between pr-4"
+            key={(userId, index)}
           >
             <div className="flex flex-row gap-3 items-center">
               <ProfileButton userId={userId} />

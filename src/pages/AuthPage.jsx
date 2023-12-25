@@ -13,7 +13,7 @@ import { clearError } from "../store/authSlice";
 
 function AuthPage() {
   const [toggleForm, setToggleForm] = useState(false);
-  const { loading, error, success } = useSelector((state) => state.auth);
+  const { userToken, error } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,10 +30,10 @@ function AuthPage() {
     dispatch(userRegister(data));
   };
   useEffect(() => {
-    if (success) {
+    if (userToken) {
       navigate("/");
     }
-  }, [success]);
+  }, [userToken]);
 
   return (
     <div className="flex-1 justify-center items-center flex ">

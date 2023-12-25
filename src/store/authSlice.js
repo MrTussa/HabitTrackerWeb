@@ -10,7 +10,6 @@ const initialState = {
   loading: false,
   userToken,
   error: null,
-  success: false,
 };
 
 const authSlice = createSlice({
@@ -34,7 +33,6 @@ const authSlice = createSlice({
       })
       .addCase(userLogin.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.success = true;
         state.userToken = payload.token;
       })
       .addCase(userLogin.rejected, (state, { payload }) => {
@@ -48,7 +46,6 @@ const authSlice = createSlice({
       })
       .addCase(userRegister.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.success = true;
         state.userToken = payload.token;
       })
       .addCase(userRegister.rejected, (state, { payload }) => {
