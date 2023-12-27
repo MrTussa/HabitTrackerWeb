@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUser, searchUsers, fetchNotifications } from "./communityActions";
+import {
+  fetchUser,
+  searchUsers,
+  fetchNotifications,
+  fetchPosts,
+  createPost,
+  toggleLike,
+} from "./communityActions";
 
 const initialState = {
   user: {},
@@ -49,6 +56,22 @@ export const communitySlice = createSlice({
       })
       .addCase(fetchNotifications.fulfilled, (state, { payload }) => {
         state.notifications = payload;
+      })
+      .addCase(fetchPosts.pending, (state) => {
+        state.loading = true;
+        state.posts = [];
+        state.error = null;
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts = action.payload;
+      })
+      .addCase(fetchPosts.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.posts.unshift(action.payload); // Добавляем новый пост в начало списка
       });
   },
 });

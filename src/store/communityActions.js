@@ -117,3 +117,74 @@ export const acceptFriendRequest = createAsyncThunk(
     }
   }
 );
+
+export const fetchPosts = createAsyncThunk(
+  "community/fetchPosts",
+  async (page, { rejectWithValue, getState }) => {
+    try {
+      const userToken = getState().auth.userToken;
+      const config = {
+        headers: {
+          Authorization: userToken,
+        },
+      };
+
+      const response = await axios.get(`${backendURL}/api/community/posts`, {
+        params: { page },
+        ...config,
+      });
+
+      return response.data.posts;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const toggleLike = createAsyncThunk(
+  "community/toggleLike",
+  async (postId, { rejectWithValue, getState }) => {
+    try {
+      const userToken = getState().auth.userToken;
+      const config = {
+        headers: {
+          Authorization: userToken,
+        },
+      };
+
+      const response = await axios.patch(
+        `${backendURL}/api/community/toggle-like`,
+        postId,
+        config
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const createPost = createAsyncThunk(
+  "community/createPost",
+  async (text, { rejectWithValue, getState }) => {
+    try {
+      const userToken = getState().auth.userToken;
+      const config = {
+        headers: {
+          Authorization: userToken,
+        },
+      };
+
+      const response = await axios.post(
+        `${backendURL}/api/community/add-post`,
+        { text },
+        config
+      );
+
+      return response.data.post;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

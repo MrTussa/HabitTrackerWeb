@@ -29,9 +29,7 @@ function MainPage() {
 
   return (
     <div className="bg-slate-100">
-      <div className="mb-8">
-        <Header />
-      </div>
+      <Header />
       <Container className={"flex flex-row justify-between bg-slate-100"}>
         <div className="w-full">
           <div className="flex flex-row justify-between gap-2">
@@ -66,8 +64,9 @@ function MainPage() {
                   variants={fadeIn("left", "spring", index * 0.3, 1)}
                   initial="hidden"
                   animate="show"
+                  key={habit._id}
                 >
-                  <HabitCard {...habit} key={habit._id} />
+                  <HabitCard {...habit} />
                 </motion.div>
               ))
             ) : !loading || error ? (

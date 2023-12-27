@@ -5,6 +5,7 @@ import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
 import ProfilePage from "./pages/ProfilePage";
 import UserPage from "./pages/UserPage";
+import PostsPage from "./pages/PostsPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import ErrorPage from "./pages/ErrorPage";
 
@@ -41,6 +42,7 @@ function App() {
             <Route index path="/" element={<MainPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/user/:userId" element={<UserPage />} />
+            <Route path="/community" element={<PostsPage />} />
           </Route>
           <Route path="/auth" element={<AuthPage />} />
           <Route path="*" element={<ErrorPage />} />

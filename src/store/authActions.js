@@ -3,8 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const backendURL = import.meta.env.VITE_BASE_URL;
 
-console.log(process.env);
-
 export const userRegister = createAsyncThunk(
   "auth/register",
   async ({ firstname, lastname, email, password }, { rejectWithValue }) => {
