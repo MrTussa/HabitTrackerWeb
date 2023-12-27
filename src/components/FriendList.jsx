@@ -118,31 +118,33 @@ const FriendList = () => {
       </div>
       {loading && <CircularProgress color="orange" />}
       {error && <p>Error: {error}</p>}
-      {friends.length > 0 ? (
-        friends.map(({ userId, firstname, lastname, stars }, index) => (
-          <motion.div
-            variants={fadeIn("left", "spring", index * 0.3, 1)}
-            initial="hidden"
-            animate="show"
-            className="flex flex-row justify-between pr-4"
-            key={(userId, index)}
-          >
-            <div className="flex flex-row gap-3 items-center">
-              <ProfileButton userId={userId} />
-              <div>
-                {firstname} {lastname}
+      <div className="flex flex-col gap-2 overflow-y-auto overflow-x-hidden h-[85%]">
+        {friends.length > 0 ? (
+          friends.map(({ userId, firstname, lastname, stars }, index) => (
+            <motion.div
+              variants={fadeIn("left", "spring", index * 0.3, 1)}
+              initial="hidden"
+              animate="show"
+              className="flex flex-row justify-between pr-4"
+              key={(userId, index)}
+            >
+              <div className="flex flex-row gap-3 items-center">
+                <ProfileButton userId={userId} />
+                <div>
+                  {firstname} {lastname}
+                </div>
               </div>
-            </div>
-            <div className="flex items-center">
-              <StarRateRoundedIcon color="orange" /> {stars}
-            </div>
-          </motion.div>
-        ))
-      ) : !loading || error ? (
-        <p className="min-h-[53px] pr-4">You don't have friends yet!</p>
-      ) : (
-        ""
-      )}
+              <div className="flex items-center">
+                <StarRateRoundedIcon color="orange" /> {stars}
+              </div>
+            </motion.div>
+          ))
+        ) : !loading || error ? (
+          <p className="min-h-[53px] pr-4">You don't have friends yet!</p>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };

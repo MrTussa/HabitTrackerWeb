@@ -24,7 +24,10 @@ export const communitySlice = createSlice({
   initialState,
   reducers: {
     addFriendHandler: (state, { payload }) => {
-      state.notifications.filter(
+      console.log(
+        state.notifications[0].message.userDetails.userId !== payload.userId
+      );
+      state.notifications = state.notifications.filter(
         (notif) => notif.message.userDetails.userId !== payload.userId
       );
       state.friends.push(payload);
