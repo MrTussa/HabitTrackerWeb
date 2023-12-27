@@ -15,7 +15,9 @@ const UserPage = () => {
   const [error, setError] = useState(null);
 
   const { userToken } = useSelector((state) => state.auth);
-  const backendURL = import.meta.env.VITE_BASE_URL;
+  const backendURL = process.env.API_URL
+    ? process.env.API_URL
+    : import.meta.env.VITE_BASE_URL;
 
   const fetchUser = async () => {
     try {

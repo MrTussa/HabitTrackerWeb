@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const backendURL = import.meta.env.VITE_BASE_URL;
+const backendURL = process.env.API_URL
+  ? process.env.API_URL
+  : import.meta.env.VITE_BASE_URL;
 
 export const fetchUser = createAsyncThunk(
   "community/fetchUser",

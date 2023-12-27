@@ -1,7 +1,9 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const backendURL = import.meta.env.VITE_BASE_URL;
+const backendURL = process.env.API_URL
+  ? process.env.API_URL
+  : import.meta.env.VITE_BASE_URL;
 
 export const userRegister = createAsyncThunk(
   "auth/register",
