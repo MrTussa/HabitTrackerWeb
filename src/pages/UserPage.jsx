@@ -57,14 +57,10 @@ const UserPage = () => {
                 <div className="font-bold ">
                   {user.firstname} {user.lastname}
                 </div>
-                <div className="text-slate-400">Name</div>
-              </div>
-              <div className="text-left">
-                <div className="font-bold ">{user.email}</div>
-                <div className="text-slate-400">Email</div>
+                <div className="text-slate-400">{user.email}</div>
               </div>
             </div>
-            <div className="py-4 px-4 mb-3 border-t border-b border-slate-200">
+            <div className="py-4 px-4 border-t ">
               <div>
                 <div className="text-slate-400">Tasks completed this week</div>
                 <div className="font-extrabold text-2xl text-orange">

@@ -41,11 +41,7 @@ const Profile = () => {
                 <div className="font-bold ">
                   {firstname} {lastname}
                 </div>
-                <div className="text-slate-400">Name</div>
-              </div>
-              <div className="text-left">
-                <div className="font-bold ">{email}</div>
-                <div className="text-slate-400">Email</div>
+                <div className="text-slate-400">{email}</div>
               </div>
             </div>
             <div className="py-4 px-4 mb-3 border-t border-b border-slate-200">
