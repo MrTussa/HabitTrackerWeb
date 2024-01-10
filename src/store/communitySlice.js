@@ -5,7 +5,6 @@ import {
   fetchNotifications,
   fetchPosts,
   createPost,
-  toggleLike,
 } from "./communityActions";
 
 const initialState = {
@@ -14,6 +13,7 @@ const initialState = {
   friends: [],
   posts: [],
   notifications: [],
+  leaderboard: [],
   loading: false,
   searchLoading: false,
   error: null,

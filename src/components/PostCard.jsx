@@ -32,7 +32,7 @@ const PostCard = ({
   return (
     <Card
       key={userId}
-      className="flex flex-col text-lg bg-white  !shadow-card font-semibold group relative !rounded-card "
+      className="flex flex-col text-lg bg-white  !shadow-card font-semibold group relative !rounded-card max-w-[500px]"
     >
       <div className="flex border-b border-slate-100 p-3 flex-row gap-3 items-center">
         <ProfileButton userId={userId} />

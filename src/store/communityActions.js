@@ -188,3 +188,26 @@ export const createPost = createAsyncThunk(
     }
   }
 );
+
+export const fetchLeaderboard = createAsyncThunk(
+  "habit/fetchLeaderboard",
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const userToken = getState().auth.userToken;
+      const config = {
+        headers: {
+          Authorization: userToken,
+        },
+      };
+
+      const response = await axios.get(
+        `${backendURL}/api/community/leaders`,
+        config
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

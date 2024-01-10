@@ -25,7 +25,7 @@ const PostsPage = () => {
     <div className="flex flex-col overflow-x-hidden bg-slate-100">
       <Header />
       <Container className={"flex flex-row justify-between bg-slate-100 !my-0"}>
-        <div className="bg-slate-100 w-full flex-row min-w-[350px]">
+        <div className="bg-slate-100 w-full flex-row min-w-[350px] max-w-[500px]">
           <div>
             <div className="flex flex-row items-center justify-between bg-white rounded-card shadow-card pl-4 mb-2">
               <div className="font-bold text-xl text-slate-800">Posts</div>
