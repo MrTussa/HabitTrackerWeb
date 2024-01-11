@@ -12,6 +12,7 @@ import FriendList from "../components/FriendList";
 import Header from "../components/Header";
 import AddPost from "../components/AddPost";
 import PostCard from "../components/PostCard";
+import Leaderboard from "../components/Leaderboard";
 
 const PostsPage = () => {
   const dispatch = useDispatch();
@@ -58,7 +59,10 @@ const PostsPage = () => {
           </div>
         </div>
         <div className="w-[35%] ml-8">
-          <FriendList />
+          <div className="mb-4">
+            <FriendList />
+          </div>
+          <Leaderboard />
         </div>
       </Container>
     </div>

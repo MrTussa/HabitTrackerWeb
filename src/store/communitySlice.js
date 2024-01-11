@@ -5,6 +5,7 @@ import {
   fetchNotifications,
   fetchPosts,
   createPost,
+  fetchLeaderboard,
 } from "./communityActions";
 
 const initialState = {
@@ -65,16 +66,19 @@ export const communitySlice = createSlice({
         state.posts = [];
         state.error = null;
       })
-      .addCase(fetchPosts.fulfilled, (state, action) => {
+      .addCase(fetchPosts.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.posts = action.payload;
+        state.posts = payload;
       })
       .addCase(fetchPosts.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       })
-      .addCase(createPost.fulfilled, (state, action) => {
-        state.posts.unshift(action.payload); // Добавляем новый пост в начало списка
+      .addCase(createPost.fulfilled, (state, { payload }) => {
+        state.posts.unshift(payload); // Добавляем новый пост в начало списка
+      })
+      .addCase(fetchLeaderboard.fulfilled, (state, { payload }) => {
+        state.leaderboard = payload;
       });
   },
 });
