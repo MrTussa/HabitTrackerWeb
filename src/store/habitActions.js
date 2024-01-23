@@ -145,3 +145,25 @@ function getCurrentDateISOString() {
   const isoString = `${year}-${month}-${day}`;
   return isoString;
 }
+
+export const fetchWeekCompletion = createAsyncThunk(
+  "habit/fetchWeekCompletion",
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const userToken = getState().auth.userToken;
+      const config = {
+        headers: {
+          Authorization: userToken,
+        },
+      };
+
+      const response = await axios.get(
+        `${backendURL}/api/habits/habits-week-completion`,
+        config
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

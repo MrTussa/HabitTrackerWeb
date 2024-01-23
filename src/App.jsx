@@ -25,6 +25,10 @@ const theme = createTheme({
       dark: "#F97316",
       contrastText: "#FFFFFF",
     },
+    gray: {
+      main: "#424242",
+      light: "#424242",
+    },
   },
   typography: {
     allVariants: {

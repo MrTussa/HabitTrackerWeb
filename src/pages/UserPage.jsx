@@ -52,7 +52,9 @@ const UserPage = () => {
         {!loading && (
           <div className="pt-5 pb-4 mb-11 bg-white rounded-card shadow-card">
             <div className="flex flex-row gap-3 px-4 pb-3 ">
-              <Avatar>Prof</Avatar>
+              <Avatar sx={{ bgcolor: "#F97316" }} src="/male_avatar.png">
+                Prof
+              </Avatar>
               <div className="text-left">
                 <div className="font-bold ">
                   {user.firstname} {user.lastname}
