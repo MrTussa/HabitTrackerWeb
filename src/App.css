@@ -26,3 +26,10 @@ h3 {
 h4 {
   color: #475569;
 }
+
+/* Deletes TimePicker outline */
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}

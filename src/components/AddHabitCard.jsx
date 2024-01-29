@@ -5,7 +5,9 @@ import { useDispatch } from "react-redux";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { Card, Button, Modal, Checkbox } from "@mui/material";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
+
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import TimePicker from "./TimePicker";
 
 const HabitCard = () => {
   const dispatch = useDispatch();
@@ -79,15 +81,15 @@ const HabitCard = () => {
               ))}
             </div>
           </div>
-          {/* <div className="bg-white rounded-card px-4 py-1 mb-3 flex justify-between">
+          <div className="bg-white rounded-card px-4 py-1 mb-3 flex justify-between">
             <div className="flex items-center">
               <span className="text-lg mr-2">Reminder</span>
               <div className="font-extralight text-xs text-slate-500 inline">
                 optional
               </div>
             </div>
-            <div>ADD CLoCK</div>
-          </div> */}
+            <TimePicker />
+          </div>
           <Button
             color="orange"
             className="w-full flex items-center justify-center !bg-white rounded-card px-4 py-1"

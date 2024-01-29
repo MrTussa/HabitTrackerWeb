@@ -63,7 +63,7 @@ function WeekCompletion(props) {
                     variant="determinate"
                     disableShrink
                     sx={{
-                      color: index !== 0 ? "#573353" : "#F97316",
+                      color: index !== 6 ? "#573353" : "#F97316",
                       position: "absolute",
                       left: 0,
                       [`& .${circularProgressClasses.circle}`]: {

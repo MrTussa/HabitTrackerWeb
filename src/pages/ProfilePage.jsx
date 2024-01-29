@@ -36,7 +36,7 @@ const Profile = () => {
           </div>
         )}
         {!loading && (
-          <div className="pt-5 pb-4 mb-11 bg-white rounded-card shadow-card">
+          <div className="min-w-[400px] pt-5 pb-4 mb-11 bg-white rounded-card shadow-card">
             <div className="flex flex-row gap-3 px-4 pb-3 ">
               <Avatar sx={{ bgcolor: "#F97316" }} src="/male_avatar.png">
                 Prof
@@ -45,11 +45,7 @@ const Profile = () => {
                 <div className="font-bold ">
                   {firstname} {lastname}
                 </div>
-                <div className="text-slate-400">Name</div>
-              </div>
-              <div className="text-left">
-                <div className="font-bold ">{email}</div>
-                <div className="text-slate-400">Email</div>
+                <div className="font-bold text-slate-400">{email}</div>
               </div>
             </div>
             <div className="py-4 px-4 border-t border-b border-slate-200">

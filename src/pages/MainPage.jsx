@@ -32,7 +32,7 @@ function MainPage() {
       <Header />
       <Container className={"flex flex-row justify-between bg-slate-100"}>
         <div className="w-full">
-          <div className="flex flex-row justify-between gap-2">
+          <div className="flex flex-row justify-between gap-2 mb-4">
             <motion.div
               variants={fadeIn("right", "spring", 0.3, 1)}
               initial="hidden"
