@@ -19,6 +19,12 @@ const HabitCard = () => {
   const openModalHandler = () => setOpenModal(true);
   const closeModalHandler = () => setOpenModal(false);
 
+  const reminderHandler = (value) => {
+    setReminder(value.format("h:mm a"));
+    value.format("h:mm a");
+    // value.format("h:mm a")
+  };
+
   const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
   const checkDay = (day) => {
@@ -88,7 +94,7 @@ const HabitCard = () => {
                 optional
               </div>
             </div>
-            <TimePicker />
+            <TimePicker reminderHandler={reminderHandler} />
           </div>
           <Button
             color="orange"

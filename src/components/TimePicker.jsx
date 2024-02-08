@@ -4,20 +4,15 @@ import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
-const TimePicker = () => {
+const TimePicker = ({ reminderHandler }) => {
   const [time, setTime] = useState(null);
-
-  const timeHandler = (value) => {
-    setTime(value);
-    console.log(value);
-  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <MobileTimePicker
-        className="w-[130px]"
+        className="w-[130px] h-9"
         value={time}
-        onAccept={timeHandler}
+        onAccept={reminderHandler}
       />
     </LocalizationProvider>
   );

@@ -40,7 +40,7 @@ const PostsPage = () => {
             {posts.length > 0 ? (
               posts.map((post, index) => (
                 <motion.div
-                  variants={fadeIn("left", "spring", index * 0.3, 1)}
+                  variants={fadeIn("left", "spring", index * 0.2, 1)}
                   initial="hidden"
                   animate="show"
                   className="mb-2"

@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+
 import Container from "../components/Container";
 import Header from "../components/Header";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,13 +11,13 @@ import { logoutUser } from "../store/authSlice";
 
 import { Avatar, Button, CircularProgress } from "@mui/material";
 import WeekCompletion from "../components/WeekCompletion";
+import { fadeIn } from "../utils/motion";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, loading, error } = useSelector((state) => state.community);
-  const { firstname, lastname, email, completedHabits } = user;
-
+  const { firstname, lastname, email, completedHabits, weekCompletion } = user;
   const logout = () => {
     dispatch(logoutUser());
     navigate("/auth");
@@ -36,7 +38,12 @@ const Profile = () => {
           </div>
         )}
         {!loading && (
-          <div className="min-w-[400px] pt-5 pb-4 mb-11 bg-white rounded-card shadow-card">
+          <motion.div
+            className="min-w-[400px] pt-5 pb-4 mb-11 bg-white rounded-card shadow-card"
+            variants={fadeIn("bottom", "spring", 0.2, 1)}
+            initial="hidden"
+            animate="show"
+          >
             <div className="flex flex-row gap-3 px-4 pb-3 ">
               <Avatar sx={{ bgcolor: "#F97316" }} src="/male_avatar.png">
                 Prof
@@ -57,7 +64,7 @@ const Profile = () => {
               </div>
             </div>
             <div className="py-4 px-4 mb-3 border-b border-slate-200">
-              <WeekCompletion />
+              <WeekCompletion weekCompletion={weekCompletion} />
             </div>
             <Button
               color="error"
@@ -67,7 +74,7 @@ const Profile = () => {
             >
               Logout
             </Button>{" "}
-          </div>
+          </motion.div>
         )}
       </Container>
     </div>

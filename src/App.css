@@ -33,3 +33,6 @@ h4 {
   border-radius: 0 !important;
   border-bottom: 1px solid #e5e7eb !important;
 }
+.MuiOutlinedInput-input {
+  padding: 5px !important;
+}

@@ -13,8 +13,12 @@ export const fetchUser = createAsyncThunk(
         },
       };
 
-      const response = await axios.get(`${backendURL}/api/user/info`, config);
+      const response = await axios.get(
+        `${backendURL}/api/community/info`,
+        config
+      );
 
+      response.data;
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -204,7 +208,7 @@ export const fetchLeaderboard = createAsyncThunk(
         `${backendURL}/api/community/leaders`,
         config
       );
-      console.log(response.data);
+      response.data;
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

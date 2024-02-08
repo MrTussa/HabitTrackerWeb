@@ -10,9 +10,7 @@ const initialState = {
   startData: null,
   habits: [],
   habitCompletion: [],
-  weekCompletion: [],
   loading: false,
-  weekCompletionLoading: false,
   error: null,
 };
 
@@ -51,19 +49,6 @@ export const habitSlice = createSlice({
       })
       .addCase(addHabit.rejected, (state, { payload }) => {
         state.loading = false;
-        state.error = payload;
-      })
-      .addCase(fetchWeekCompletion.pending, (state) => {
-        state.weekCompletionLoading = true;
-        state.error = null;
-      })
-      .addCase(fetchWeekCompletion.fulfilled, (state, { payload }) => {
-        state.weekCompletion = payload;
-        state.weekCompletionLoading = false;
-        state.error = null;
-      })
-      .addCase(fetchWeekCompletion.rejected, (state, { payload }) => {
-        state.weekCompletionLoading = false;
         state.error = payload;
       });
   },

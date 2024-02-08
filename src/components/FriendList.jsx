@@ -122,7 +122,7 @@ const FriendList = () => {
         {friends.length > 0 ? (
           friends.map(({ userId, firstname, lastname, stars }, index) => (
             <motion.div
-              variants={fadeIn("left", "spring", index * 0.3, 1)}
+              variants={fadeIn("left", "spring", index * 0.2, 1)}
               initial="hidden"
               animate="show"
               className="flex flex-row justify-between pr-4"

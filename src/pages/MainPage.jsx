@@ -28,7 +28,7 @@ function MainPage() {
   }, [dispatch, userToken]);
 
   return (
-    <div className="bg-slate-100">
+    <div>
       <Header />
       <Container className={"flex flex-row justify-between bg-slate-100"}>
         <div className="w-full">
@@ -52,7 +52,7 @@ function MainPage() {
           <div className=" px-4 grid grid-cols-4">
             <div className="text-left">Habit name</div>
             <div>Days</div>
-            <div></div>
+            <div>Reminder</div>
             <div className="text-right">Completion</div>
           </div>
           <div className="flex flex-col gap-3">
@@ -61,7 +61,7 @@ function MainPage() {
             {habits.length > 0 ? (
               habits.map((habit, index) => (
                 <motion.div
-                  variants={fadeIn("left", "spring", index * 0.3, 1)}
+                  variants={fadeIn("left", "spring", index * 0.2, 1)}
                   initial="hidden"
                   animate="show"
                   key={habit._id}
@@ -76,6 +76,7 @@ function MainPage() {
             ) : (
               ""
             )}
+            {/* TODO: Convert to component */}
             <AddHabitCard />
           </div>
         </div>
